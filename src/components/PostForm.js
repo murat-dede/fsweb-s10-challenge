@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
 import { useHistory } from "react-router";
 import Gratitude from "./../assets/grForm.png";
+import { useDeferredValue } from "react";
+import { useDispatch } from "react-redux";
+import { notEkle, notEkleAPI } from "../actions";
 
 export default function PostForm() {
   const {
@@ -10,7 +13,7 @@ export default function PostForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "onChange" });
-
+const dispatch = useDispatch()
   const history = useHistory();
 
   function onSubmit(data) {
@@ -21,7 +24,7 @@ export default function PostForm() {
         .filter((v) => v !== "")
         .join("|"),
     };
-
+dispatch(notEkle(yeniNot));
     // burada ilgili eylemi dispatch edin
     // toast mesajı gösterin
     // sonra aşağıdaki satırı aktifleştirin
